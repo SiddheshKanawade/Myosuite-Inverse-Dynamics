@@ -1,4 +1,5 @@
 # read h5 file and render video with mujoco -> check if it's same as video
+import os
 import time
 
 import gymnasium as gym
@@ -12,7 +13,6 @@ inverse_name_map = {
     "Abs_r3": "Abs_r3",
     "pro_sup": "pro_sup",
     "deviation": "deviation",
-    ""
     # Spine
     "L5_S1_Flex_Ext": "flex_extension",
     "L5_S1_Lat_Bending": "lat_bending",
@@ -96,7 +96,9 @@ data = {
 
 df = pd.DataFrame(data)
 
-df.to_csv("./trajectory/target_trajectory.csv")
+# Create trajectory directory if it doesn't exist
+os.makedirs("./trajectory", exist_ok=True)
+df.to_csv("./trajectory/target_trajectory.csv", index=False)
 
 env = gym.make("myoChallengeTableTennisP1-v0")
 env.reset()
