@@ -77,7 +77,7 @@ inverse_name_map = {
 name_map = {v: k for k, v in inverse_name_map.items()}
 
 
-H5_FILE = "./models/trace_resized_trimmed_test_2_compressed.h5"
+H5_FILE = "./trajectory/trace_resized_trimmed_test_2_compressed.h5"
 h5trajectory = Trace.load(H5_FILE)
 
 motion_name = list(h5trajectory.trace.keys())[0]
@@ -96,6 +96,7 @@ data = {
 
 df = pd.DataFrame(data)
 
+df.to_csv("./trajectory/target_trajectory.csv")
 
 env = gym.make("myoChallengeTableTennisP1-v0")
 env.reset()
