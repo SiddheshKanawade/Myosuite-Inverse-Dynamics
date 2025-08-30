@@ -77,7 +77,7 @@ inverse_name_map = {
 name_map = {v: k for k, v in inverse_name_map.items()}
 
 
-H5_FILE = "./data/trace_resized_trimmed_test_2_compressed.h5"
+H5_FILE = "./models/trace_resized_trimmed_test_2_compressed.h5"
 h5trajectory = Trace.load(H5_FILE)
 
 motion_name = list(h5trajectory.trace.keys())[0]
@@ -106,6 +106,8 @@ env_joint_names = [
 _subc = [inverse_name_map[c] for c in df.columns if c in inverse_name_map.keys()]
 subc = [c for c in _subc if c in env_joint_names]
 
+# Save the model
+# mujoco.to_file("./models/mjmodel.xml", env.sim.model)
 try:
     for t in range(300):
         # env.sim.data.qpos[0:7] = np.array(data_root).reshape(-1, 7)[t]
@@ -156,9 +158,7 @@ finally:
 #         mj_data.qpos[mjc_j_idx] = df[jn].loc[t]
 
 #     mujoco.mj_forward(mj_model, mj_data)
-#     renderer_ref.update_scene(
-#         mj_data, camera=camera
-#     )  # , scene_option=options_ref)
+#     renderer_ref.update_scene(mj_data, camera=camera)  # , scene_option=options_ref)
 #     frame = renderer_ref.render()
 #     frames.append(frame)
 
@@ -168,6 +168,4 @@ finally:
 
 # os.makedirs("videos", exist_ok=True)
 # output_name = "videos/playback_mot.mp4"
-# skvideo.io.vwrite(
-#     output_name, np.asarray(frames), outputdict={"-pix_fmt": "yuv420p"}
-# )
+# skvideo.io.vwrite(output_name, np.asarray(frames), outputdict={"-pix_fmt": "yuv420p"})
