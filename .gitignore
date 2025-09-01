@@ -210,3 +210,4 @@ models/
 notebooks/
 content/
 *.TXT
+*.csv
