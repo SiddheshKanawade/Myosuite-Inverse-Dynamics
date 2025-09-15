@@ -209,6 +209,8 @@ __marimo__/
 models/
 notebooks/
 content/
+errors/
+data/
 *.TXT
-*.csv
+# *.csv
 *.png
